@@ -25,7 +25,7 @@ def datExp(UI=False,Filter=False,elementName="H",lowerBound=0,higherBound=1,want
     
     #This loop goes through each wanted nuclei in the range of A values and makes the variable to be used (and iterated through) to from b in the a=b expression in data class.
     for i in range(lowerBound,higherBound+1):
-        itervar= str(i)+elementName 
+        itervar= str(i)+elementName
         try:
             indata=dc.data('ensdf.'+str(i).zfill(3),itervar,'EoL',energyLim)
             if(Filter):
@@ -37,7 +37,6 @@ def datExp(UI=False,Filter=False,elementName="H",lowerBound=0,higherBound=1,want
             if(UI):
                 ERROR="No file found for or error with " +'ensdf.'+str(i).zfill(3)##Allows the user to see if a specific ENSDF file is giving them trouble.
                 print ERROR
-
                 
             
     if UI:
@@ -71,10 +70,12 @@ def pltFileExp(elementName,lowerBound,higherBound,Filter=False,wantedSpins='',UI
 
     #plt file Naming
     if(Filter):
-        fileName= "Output\\" + "gnuPlot\\"+str(lowerBound)+str(elementName)+"_"+str(higherBound)+str(elementName)+wantedSpins+fileParsingFactorStr+"_Fil.plt"        
-        pltFile = open(fileName.replace('/', '_'),'wb')
+        fileName= str(lowerBound)+str(elementName)+"_"+str(higherBound)+str(elementName)+wantedSpins+fileParsingFactorStr+"_Fil.plt"        
+        fileName= "Output/" + "gnuPlot/" + fileName.replace('/','_')
+        pltFile = open(fileName,'wb')
     else:
-        fileName="Output\\" + "gnuPlot\\"+str(lowerBound)+str(elementName)+"_"+str(higherBound)+str(elementName)+".plt"
+        fileName= str(lowerBound)+str(elementName)+"_"+str(higherBound)+str(elementName)+".plt"
+        fileName= "Output/" + "gnuPlot/" + fileName.replace('/','_')
         pltFile = open(fileName,'wb')
 
 

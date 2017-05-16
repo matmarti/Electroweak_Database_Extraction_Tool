@@ -23,9 +23,8 @@ class data:##This is the main data class
         self.name = ISOvar
         self.op=option
 
-
         ##If there is a data file that matches the user's input then this program will try to extract the data.
-        self.f = open("Data\\"+str(ENSDF),'rU')
+        self.f = open("Data/"+str(ENSDF),'rU')
         ##Each line of the file is split into list so the code can parse through each line easier
         for line in self.f:
             line = line.split()
@@ -38,7 +37,6 @@ class data:##This is the main data class
             b = str(ISOvar)
             ##This part of the code contains parsing algorithims to find wanted values,depending on what option is used.
             ##Marcus found that experimental data are one lines when c equal "L"
-
 
 
 
@@ -235,20 +233,22 @@ class data:##This is the main data class
     def export(self,fExtOption = ".txt",extraTitleText=""):
             if(self.op == 'EoL'):##for energies and spins
                 if(fExtOption==".dat"or fExtOption=="_Fil.dat"):##To make data files for use in gnuplot and plt file.
-                    fileName="Output\\" + "gnuPlot\\"+str(self.name)+extraTitleText+fExtOption##creates filename
-                    datFile = open(fileName.replace('/', '_'),'wb')##Creates a file with a valid file name.
+                    fileName=str(self.name)+extraTitleText+fExtOption##creates filename
+                    fileName="Output/" + "gnuPlot/"+fileName.replace('/','_')
+                    datFile = open(fileName,'wb')##Creates a file with a valid file name.
                     for i in range(len(self.data)):##Write the line fro each entry and each entry is delimited by a ,
                         datFile.write(str(self.name)+','+str(self.data[i][0])+','+str(self.data[i][1])+'\n')
                         ###.dat is used for preparing data for gnuplot
                 else:##This case is like the code above but for every other file type and is delimited by tabs.
-                    fileName="Output\\" + "gnuPlot\\"+str(self.name)+extraTitleText+fExtOption
-                    datFile = open(fileName.replace('/', '_'),'wb')
-                    exportFile = open("Output\\"+str(self.name)+extraTitleText+fExtOption,'wb')
+                    fileName=str(self.name)+extraTitleText+fExtOption
+                    fileName="Output/" + "gnuPlot/"+fileName.replace('/','_')
+                    datFile = open(fileName,'wb')##Creates a file with a valid file name.
+                    exportFile = open("Output/"+str(self.name)+extraTitleText+fExtOption,'wb')
                     for i in range(len(self.data)):
                         exportFile.write(str(self.name)+'\t'+str(self.data[i][0])+'\t'+str(self.data[i][1])+'\n')
                         ##.txt or any other file extension is used for preparing data for generic text file.    
             else:##Writes the each entry of our datalist with one entry per line.
-                exportFile = open("Output\\"+str(self.name)+".txt",'wb')
+                exportFile = open("Output/"+str(self.name)+".txt",'wb')
                 for i in range(len(self.data)):
                     exportFile.write(str(self.name)+'\t'+str(self.data[i])+'\n')
                     ##Writes Energy Only
