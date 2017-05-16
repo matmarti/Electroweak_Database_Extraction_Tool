@@ -26,19 +26,28 @@ class data:##This is the main data class
         ##If there is a data file that matches the user's input then this program will try to extract the data.
         self.f = open("Data/"+str(ENSDF),'rU')
         ##Each line of the file is split into list so the code can parse through each line easier
+
+        counter = 0
+        a = 'apple'
         for line in self.f:
             line = line.split()
+
+            if len(line) == 0 and \
+               a.lower() == b.lower():
+                break
 
             ##Names for each entry which are used to filter which lines are used 
             if(len(line) >= 3): ##This makes sure not to take any lines that are emptry which will cause an error down the line.
                 a = line[0] ##The first entry of each line, usually the filename. a will be used to double check to see if that line is valid.
                 c = line[1] ##This second entry contains what type of data and information is in the list line. The ENSDF website has a complete list of
                             ##each line type. I used L since L lines have experimental data.
+            if(len(line) == 0):
+                a = 'apple'
+
+                
             b = str(ISOvar)
             ##This part of the code contains parsing algorithims to find wanted values,depending on what option is used.
             ##Marcus found that experimental data are one lines when c equal "L"
-
-
 
 
 #This massive series of nested loops is what extracts the data of interest from the monster ensdf data files according to the user's inputs. 
